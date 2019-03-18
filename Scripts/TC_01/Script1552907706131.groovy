@@ -13,3 +13,26 @@ import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 import internal.GlobalVariable as GlobalVariable
 
+
+
+
+import com.kms.katalon.core.configuration.RunConfiguration as RunConfiguration
+import com.kms.katalon.core.util.internal.PathUtil as PathUtil
+
+'Get full directory\'s path of android application'
+def appPath = RunConfiguration.getProjectDir() + '/androidapp/APIDemos.apk'
+
+Mobile.startApplication(appPath, false)
+
+Mobile.tap(findTestObject('Application/android.widget.TextView - Graphics'), 10)
+
+Mobile.scrollToText('Xfermodes')
+
+def objectGetTextXfermodes = 'Application/Graphics/android.widget.TextView - Xfermodes'
+
+'Get item\'s label'
+def itemText = Mobile.getText(findTestObject(objectGetTextXfermodes), 10)
+
+Mobile.verifyEqual(itemText, 'Xfermodes')
+
+Mobile.closeApplication()
