@@ -14,7 +14,7 @@ jobs:
           command: yes | sdkmanager --licenses || exit 0 && yes | sdkmanager --update || exit 0
       - run:
           name: Setup Emulator
-          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
+          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a" && ls
       - run:
           name: Launch Emulator
           command: |
@@ -28,11 +28,13 @@ jobs:
           command: |
               circle-android wait-for-boot
               adb shell input keyevent 82
+              ls
       - run:
           name: Execute Katalon Studio
+          entrypoint: katalon-execute.sh
           command: |
-              cd ~/src
               ls
+              cd ~/src
           background: true
       - store-test_results:
           path: ./reports
