@@ -21,6 +21,7 @@ jobs:
                   cd ${ANDROID_HOME}/emulator;ls
                   export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
                   emulator -avd test -no-window -noaudio -no-boot-anim -no-window -accel on
+                  ls
           background: true
       - run:
           name: Wait emulator
@@ -30,9 +31,7 @@ jobs:
       - run:
           name: Execute Katalon Studio
           command:  |
-              cd ~/Katalon-Android
-              ls
-              katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android"
+              cd ~/Katalon-Android && ./script.sh
           background: true
       - store-test_results:
           path: ./report
