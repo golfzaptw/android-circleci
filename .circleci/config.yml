@@ -30,7 +30,7 @@ jobs:
               adb shell input keyevent 82
       - run:
           name: Execute Katalon Studio
-          command: cd ~ && ls && katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01"
+          command: cd ~ && ls && cd src && ls
           background: true
       - store-test_results:
           path: ./reports
