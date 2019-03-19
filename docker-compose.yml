@@ -1,22 +1,16 @@
 version: '3.6'
 
 services:
-  setup-android:
+  Accept licenses:
     build:
       context: .
       dockerfile: androidDocker/Dockerfile
     container_name: set-android
     environment:
         - ANDROID_HOME = /usr/local/android-sdk
-    command: |
-        bash -c "
-        yes | sdkmanager --licenses || exit 0 && yes | sdkmanager --update || exit 0
-        sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
-        cd ${ANDROID_HOME}/emulator;ls
-        export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
-        emulator -avd test -no-window -noaudio -no-boot-anim -no-window -accel on
-        circle-android wait-for-boot
-        adb shell input keyevent 82 "
+    command: yes | sdkmanager --licenses || exit 0 && yes | sdkmanager --update || exit 0
+  
+  
   executed-katalon:
     build:
       context: .
