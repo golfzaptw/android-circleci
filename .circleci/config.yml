@@ -29,9 +29,11 @@ jobs:
               adb shell input keyevent 82
       - run:
           name: Execute Katalon Studio
-          command: |
-              docker ps -a
-              cd ~/Katalon-Android && katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android"
+          command:  |
+        bash -c "
+        cd ~/Katalon-Android
+        ./katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android""
+              
           background: true
       - store-test_results:
           path: ./report
