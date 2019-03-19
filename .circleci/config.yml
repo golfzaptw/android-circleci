@@ -1,12 +1,12 @@
 version: 2
 jobs:
   Run Emulator:
-    working_directory: ~/Katalon-Android
     docker:
-      - image: circleci/android:api-28
       - image: katalonstudio/katalon
+      - image: circleci/android:api-28
     environment:
       JVM_OPTS: -Xmx3200m
+    working_directory: ~/
     steps:
       - checkout
       - run:
