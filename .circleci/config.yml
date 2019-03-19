@@ -49,6 +49,7 @@ workflows:
   version: 2
   commit:
     jobs:
+      - Run Emulator
       - Executed Katalon:
           requires:
             - Run Emulator
