@@ -7,4 +7,4 @@ mkdir -p ./reports/android
 katalon_opts='-browserType="Android" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01"'
 # สั่งให้ Docker ทำการสร้าง Containner และใช้ Image ที่เรา Pull 
 # มาทำการ Run ชุดการทดสอบ
-docker run --rm -v $(pwd):/katalon/katalon/source:ro -v $(pwd)/reports/android:/katalon/katalon/report -e KATALON_OPTS="$katalon_opts" katalonstudio/katalon
+sudo docker run --rm -v $(pwd):/katalon/katalon/source:ro -v $(pwd)/reports/android:/katalon/katalon/report -e KATALON_OPTS="$katalon_opts" katalonstudio/katalon

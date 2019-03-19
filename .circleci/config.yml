@@ -35,9 +35,9 @@ jobs:
               ./script.sh
           background: true
       - store-test_results:
-          path: ./report
+          path: ./reports/android
       - store-artifacts:
-          path: ./report
+          path: ./reports/android
 
   # Executed Katalon:
   #   working_directory: ~/Katalon-Android
