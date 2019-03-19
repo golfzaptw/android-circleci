@@ -8,7 +8,7 @@ services:
     container_name: set-android
     environment:
         - ANDROID_HOME = /usr/local/android-sdk
-    command: >
+    command: |
         bash -c "
         yes | sdkmanager --licenses || exit 0 && yes | sdkmanager --update || exit 0
         sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
