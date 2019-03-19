@@ -32,7 +32,7 @@ jobs:
           command:  |
               cd ~/Katalon-Android
               ls
-              ./katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android"
+              katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android"
           background: true
       - store-test_results:
           path: ./report
