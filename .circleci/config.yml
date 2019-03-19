@@ -31,13 +31,12 @@ jobs:
       - run:
           name: Execute Katalon Studio
           command:  |
-              cd ~/Katalon-Android && chmod 777 script.sh
-              ./script.sh
+              katalon-execute.sh -browserType="Chrome" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01"
           background: true
       - store-test_results:
-          path: ./reports/android
+          path: ./reports
       - store-artifacts:
-          path: ./reports/android
+          path: ./reports
 
   # Executed Katalon:
   #   working_directory: ~/Katalon-Android
