@@ -18,7 +18,7 @@ jobs:
     - run:
         name: Launch Emulator
         command: |
-          cd ${ANDROID_HOME}/emulator;ls
+          cd ${ANDROID_HOME}/emulator;pwd
           export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
           emulator -avd test -no-window -noaudio -no-boot-anim -no-window -accel on
           pwd
