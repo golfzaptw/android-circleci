@@ -21,4 +21,5 @@ services:
       context: .
       dockerfile: katalonDocker/Dockerfile
     container_name: executed-katalon
-    command: cd ~/Katalon-Android && katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android"
+    command: |
+        cd ~/Katalon-Android && katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01" -browserType="Android"
