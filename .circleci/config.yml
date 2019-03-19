@@ -1,13 +1,43 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/Katalon-Android
+    docker:
+      - image: circleci/android:api-28
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - run:
+          name: Accept licenses
+          command: yes | sdkmanager --licenses || exit 0 && yes | sdkmanager --update || exit 0
+      - run:
+          name: Setup Emulator
+          command: sdkmanager "system-images;android-21;default;armeabi-v7a" && echo "no" | avdmanager create avd -n test -k "system-images;android-21;default;armeabi-v7a"
+      - run:
+          name: Launch Emulator
+          command: |
+                  cd ${ANDROID_HOME}/emulator;ls
+                  export LD_LIBRARY_PATH=${ANDROID_HOME}/emulator/lib64:${ANDROID_HOME}/emulator/lib64/qt/lib
+                  emulator -avd test -no-window -noaudio -no-boot-anim -no-window -accel on
+          background: true
+      - run:
+          name: Wait emulator
+          command: |
+              circle-android wait-for-boot
+              adb shell input keyevent 82
+  test:
+    working_directory: ~/Katalon-Android
     docker:
       - image: katalonstudio/katalon
+    environment:
+      JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - run:
           name: Execute Katalon Studio
-          command: katalon-execute.sh -browserType="Android" -retry=0 -statusDelay=15 -testSuitePath="Test Suites/TS_01"
+          command: cd ~/Katalon-Android && katalon-execute.sh -retry=0 -statusDelay=15 -testSuitePath="Test Suites/Search" -browserType="Android"
+          background: true
       - store-test_results:
           path: ./report
       - store-artifacts:
