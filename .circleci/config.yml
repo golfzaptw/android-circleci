@@ -1,5 +1,6 @@
 version: 2
-  build:
+job:
+  run-emu:
     working_directory: ~/Katalon-Android
     docker:
       - image: circleci/android:api-28
@@ -42,9 +43,10 @@ version: 2
       - store-artifacts:
           path: ./report
           
-  workflows:
-  build_accept_deploy:
+workflows:
+  version: 2
+  commit:
     jobs:
       - test:
           requires:
-            - build
+            - run-emu
