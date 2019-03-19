@@ -1,6 +1,6 @@
 version: 2
-job:
-  run-emu:
+jobs:
+  Run Emulator:
     working_directory: ~/Katalon-Android
     docker:
       - image: circleci/android:api-28
@@ -26,7 +26,8 @@ job:
           command: |
               circle-android wait-for-boot
               adb shell input keyevent 82
-  test:
+
+  Executed Katalon:
     working_directory: ~/Katalon-Android
     docker:
       - image: katalonstudio/katalon
@@ -42,11 +43,12 @@ job:
           path: ./report
       - store-artifacts:
           path: ./report
-          
+
+
 workflows:
   version: 2
   commit:
     jobs:
-      - test:
+      - Executed Katalon:
           requires:
-            - run-emu
+            - Run Emulator
